@@ -14,11 +14,11 @@ Gemma-OCR App is a powerful Optical Character Recognition (OCR) application buil
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/gemma-ocr-app.git
+    git clone https://github.com/axeltanjung/gemma3-cor.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd gemma-ocr-app
+    cd gemma3-cor
     ```
 3. Install dependencies:
     ```bash
