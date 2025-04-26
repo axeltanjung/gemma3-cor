@@ -1,49 +1,22 @@
-# Gemma-OCR App
-## Overview
+# OCR Program using Gemma3
 
-Gemma-OCR App is a powerful Optical Character Recognition (OCR) application built using the Gemma3 framework. It enables users to extract text from images and scanned documents with high accuracy and efficiency.
+A Streamlit application that extracts text from images using the Gemma3 language model. This application helps users process and understand text content from images in a structured format.
 
 ## Features
 
-- **Text Extraction**: Extract text from various image formats (e.g., PNG, JPEG, TIFF).
-- **Multi-language Support**: Recognizes text in multiple languages.
-- **Batch Processing**: Process multiple files simultaneously.
-- **Customizable**: Easily extendable for specific OCR needs using Gemma3's modular architecture.
+- Extract text from images using Gemma3 model
+- Support for various image formats (JPG, JPEG, PNG) 
+- Structured output in Markdown format
+- Clear and user-friendly interface
+- Image upload and preview
+- One-click text extraction
+
+## Prerequisites
+
+1. Python 3.8 or higher
+2. Ollama installed on your system
+3. Gemma3 model installed in Ollama
 
 ## Installation
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/axeltanjung/gemma3-cor.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd gemma3-cor
-    ```
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-## Usage
-
-1. Run the application:
-    ```bash
-    python app.py
-    ```
-2. Upload an image or scanned document.
-3. Click "Extract Text" to retrieve the text content.
-
-## Requirements
-
-- Python 3.8 or higher
-- Gemma3 framework
-- Tesseract-OCR (for backend processing)
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+1. Clone this repository:

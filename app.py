@@ -35,22 +35,34 @@ with st.sidebar:
         st.image(image, caption='Uploaded Image', use_column_width=True)
         
         if st.button("Extract Text", type="primary"):
-            with spinner("Processing..."):
-                # Display a spinner while processing the image
+            with st.spinner("Processing..."):
                 try:
+                    # Convert image to base64
+                    buffered = io.BytesIO()
+                    image.save(buffered, format="PNG")
+                    img_str = base64.b64encode(buffered.getvalue()).decode()
+                    
+                    # Make the API call
                     response = ollama.chat(
-                          model="gemma3:12b", 
-                          messages=[{"role": "user", 
-                                     "content": """Analyze the text in the provided image. Extract all readable content
-                                                    and present it in a structured Markdown format that is clear, concise, 
-                                                    and well-organized. Ensure proper formatting (e.g., headings, lists, or
-                                                    code blocks) as necessary to represent the content effectively.""",
-                                    "image":[uploaded_file.getvalue()]
-                                    }]
-                                )
-                    st.session_state['ocr_result'] = response.messages.content
+                        model="gemma3:12b",
+                        messages=[{
+                            "role": "user",
+                            "content": """Analyze the text in the provided image. Extract all readable content
+                                        and present it in a structured Markdown format that is clear, concise, 
+                                        and well-organized. Ensure proper formatting (e.g., headings, lists, or
+                                        code blocks) as necessary to represent the content effectively.""",
+                            "images": [img_str]
+                        }]
+                    )
+                    
+                    if response and hasattr(response, 'message'):
+                        st.session_state['ocr_result'] = response.message.content
+                    else:
+                        st.error("No response received from the model")
+                        
                 except Exception as e:
-                    st.error(f"An error occurred: {e}")
+                    st.error(f"An error occurred: {str(e)}")
+                    st.info("Make sure Ollama is running and the gemma3:12b model is installed.")
 
 # Main content for result
 if 'ocr_result' in st.session_state:
@@ -60,3 +72,10 @@ else:
 
 # Footer
 st.markdown("---")
+st.markdown("### Instructions")
+st.markdown("""
+1. Make sure Ollama is installed and running on your system
+2. Install the gemma3:12b model using: `ollama pull gemma3:12b`
+3. Upload an image containing text
+4. Click 'Extract Text' to process the image
+""")
